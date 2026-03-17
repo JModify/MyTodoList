@@ -11,30 +11,8 @@ export default function App() {
     <NavigationContainer>
       <StatusBar style="dark"/>
       <Stack.Navigator initialRouteName="Home">
-        <Stack.Screen 
-          name="Home" 
-          component={Home} 
-          options={{
-            title: "My Todo List",
-            headerStyle: styles.header,
-            headerTintColor: '#000000',
-            headerTitleStyle: styles.headerText,
-          }}
-        />
+        <Stack.Screen name="Home" component={Home}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  header: {
-    borderBottomColor: 'black',
-    borderBottomWidth: 2,
-    backgroundColor: '#ffffff',
-    height: 110,
-  },
-  headerText: {
-    fontWeight: 'bold',
-    fontSize: 20,
-  }
-});
