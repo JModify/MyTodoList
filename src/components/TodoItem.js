@@ -1,4 +1,4 @@
-import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import Colors from '../constants/colors';
 
 export default function TodoItem({text}) {
@@ -10,18 +10,16 @@ export default function TodoItem({text}) {
 }
 
 const styles = StyleSheet.create({
+
+    // Style for todo item.
     item: {
-        marginTop: 5,
-        marginBottom: 5,
-        marginLeft: 5,
-        marginRight: 5,
-        paddingTop: 5,
-        paddingBottom: 5,
-        paddingLeft: 5,
-        paddingRight: 5,
+        margin: 5,
+        padding: 5,
         backgroundColor: Colors.todoItem,
         borderRadius: 5,
     },
+
+    // Style for text contained within todo item.
     itemText: {
         fontSize: 20,
     }

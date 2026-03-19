@@ -1,8 +1,8 @@
-import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { Pressable, StyleSheet, Text } from 'react-native';
 import Colors from '../constants/colors';
 
 export default function TodoCreateButton({navigation}) {
-    // Not yet implemented
+    // Not yet implemented.
     //const navToCreateItem = () => navigation.navigate('CreateTodo');
 
     // Retrieve button style based on "pressed" status.
@@ -13,6 +13,7 @@ export default function TodoCreateButton({navigation}) {
         <Pressable
             style={getButtonStyle}
             onPress={() => {
+                // Not yet implemented.
                 //navToCreateItem();
             }}
         >
@@ -22,6 +23,7 @@ export default function TodoCreateButton({navigation}) {
 };
 
 const styles = StyleSheet.create({
+    // Style for todo creation button.
     button: {
         paddingTop: 10,
         paddingBottom: 10,
@@ -31,17 +33,22 @@ const styles = StyleSheet.create({
         marginRight: 20,
         backgroundColor: Colors.createTodoButton,
         borderRadius: 5,
-        alignContent: 'center',
         justifyContent: 'center',
         shadowColor: 'black',
         shadowOffset: { width: 0, height: 4 },
         shadowOpacity: 0.25,
         shadowRadius: 8,
+        elevation: 4,
         flex: 1,
     },
+
+    // Style changing opacity for todo creation button with 
+    // pressed status being true.
     pressed: {
       opacity: 0.5,
     },
+
+    // Style for text contained within todo creation button.
     buttonText: {
         fontSize: 20,
         color: 'white',
