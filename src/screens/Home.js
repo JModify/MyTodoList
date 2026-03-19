@@ -7,7 +7,7 @@ import TodoCreateButton from '../components/TodoCreateButton';
 let ct = 0;
 export default function Home({navigation}) {
 
-    // useLayoutEffect called after React has updated UI but just before
+    // Function useLayoutEffect called after React has updated UI but just before
     // screen is painted to end user.
     useLayoutEffect(() => {
         navigation.setOptions({
@@ -46,17 +46,21 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
     },
 
+    // Header display containing application title.
     header: {
         borderBottomColor: 'black',
         borderBottomWidth: 2,
         backgroundColor: 'white',
         height: 110,
     },
+
+    // Header text / application title formatting.
     headerText: {
         fontWeight: 'bold',
         fontSize: 20,
     },
-    // Main display containing all Todo items. 
+
+    // Main display containing all todo items. 
     mainDisplay: {
         marginTop: 10,
         marginBottom: 10,
@@ -68,6 +72,8 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: 'column',
     },
+
+    // Footer display containing Todo creation button.
     footer: {
         borderTopWidth: 1,
         flexDirection: 'row',

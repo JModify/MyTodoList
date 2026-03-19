@@ -1,6 +1,9 @@
 const Colors = {
+
+    // Todo creation button background colour.
     createTodoButton: "#00a2ff",
-    shadowBlack: "#000000a0",
+
+    // Todo item background colour.
     todoItem: "#89e7ff",
 }
 
