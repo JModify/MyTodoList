@@ -8,11 +8,12 @@ export default function AddTodo({navigation}) {
 
             </View>
             <View style={styles.footer}>
-                
+
             </View>
         </View>
     )
 }
+
 
 const styles = StyleSheet.create({
     // Outer wrapping container which flexes to take as much available

@@ -1,6 +1,9 @@
 import { Pressable, StyleSheet, Text } from 'react-native';
 import Colors from '../constants/colors';
 
+// Using @Expo import since running SDK 54
+import Ionicons from '@expo/vector-icons/Ionicons';
+
 export default function TodoCreateButton({navigation}) {
     // Navigate to todo creation screen.
     const navToAddTodo = () => navigation.navigate('AddTodo');
@@ -17,7 +20,7 @@ export default function TodoCreateButton({navigation}) {
                 navToAddTodo();
             }}
         >
-            <Text style={styles.buttonText}>ADD NEW TODO</Text>
+            <Text style={styles.buttonText}><Ionicons name='add-circle' style={styles.iconStyle}/> ADD NEW TODO</Text>
         </Pressable>
     );
 };
@@ -53,5 +56,10 @@ const styles = StyleSheet.create({
         fontSize: 20,
         color: 'white',
         textAlign: 'center',
+    },
+
+    iconStyle: {
+        color: 'blue',
+        fontSize: 20,
     }
 });
