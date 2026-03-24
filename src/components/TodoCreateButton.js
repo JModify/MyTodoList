@@ -2,8 +2,8 @@ import { Pressable, StyleSheet, Text } from 'react-native';
 import Colors from '../constants/colors';
 
 export default function TodoCreateButton({navigation}) {
-    // Not yet implemented.
-    //const navToCreateItem = () => navigation.navigate('CreateTodo');
+    // Navigate to todo creation screen.
+    const navToAddTodo = () => navigation.navigate('AddTodo');
 
     // Retrieve button style based on "pressed" status.
     const getButtonStyle = ({ pressed }) =>
@@ -13,8 +13,8 @@ export default function TodoCreateButton({navigation}) {
         <Pressable
             style={getButtonStyle}
             onPress={() => {
-                // Not yet implemented.
-                //navToCreateItem();
+                // Navigate to creation screen.
+                navToAddTodo();
             }}
         >
             <Text style={styles.buttonText}>ADD NEW TODO</Text>
