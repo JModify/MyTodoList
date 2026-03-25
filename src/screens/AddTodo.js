@@ -1,4 +1,6 @@
 import {StyleSheet, View, Text, TextInput, Keyboard, Pressable} from 'react-native';
+import SaveButton from '../components/SaveButton';
+import CancelButton from '../components/CancelButton';
 
 export default function AddTodo({navigation}) {
 
@@ -33,6 +35,8 @@ export default function AddTodo({navigation}) {
                 </View>
             </View>
             <View style={styles.footer}>
+                <CancelButton navigation={navigation}/>
+                <SaveButton navigation={navigation}/>
             </View>
         </Pressable>
     )

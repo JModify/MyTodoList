@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
         marginTop: 10,
         marginLeft: 20,
         marginRight: 20,
-        backgroundColor: Colors.createTodoButton,
+        backgroundColor: Colors.deepBlue,
         borderRadius: 5,
         justifyContent: 'center',
         shadowColor: 'black',
