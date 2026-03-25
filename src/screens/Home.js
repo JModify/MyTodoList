@@ -6,7 +6,7 @@ import TodoCreateButton from '../components/TodoCreateButton';
 export default function Home({navigation}) {
     return (
         <View style={styles.container}>
-            <View style={styles.mainDisplay}>
+            <View style={styles.body}>
                 <TodoItem text={"Buy Eggs"}/>
                 <TodoItem text={"Buy Apples"}/>
                 <TodoItem text={"Buy Milk"}/>
@@ -29,8 +29,8 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
     },
 
-    // Main display containing all todo items. 
-    mainDisplay: {
+    // body display containing all todo items. 
+    body: {
         margin: 10, 
         alignItems: 'stretch',
         justifyContent: 'flex-start',

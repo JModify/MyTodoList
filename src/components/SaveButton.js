@@ -4,7 +4,7 @@ import Colors from '../constants/colors';
 // Using @Expo import since running SDK 54
 import Ionicons from '@expo/vector-icons/Ionicons';
 
-export default function SaveButton() {
+export default function SaveButton({navigation}) {
 
 }
 
