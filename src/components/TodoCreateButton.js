@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
     button: {
         paddingTop: 10,
         paddingBottom: 10,
-        marginBottom: 25,
+        marginBottom: 60,
         marginTop: 10,
         marginLeft: 20,
         marginRight: 20,
@@ -58,8 +58,9 @@ const styles = StyleSheet.create({
         textAlign: 'center',
     },
 
+    // Icon style for add todo icon.
     iconStyle: {
-        color: 'blue',
+        color: Colors.iconBlue,
         fontSize: 20,
     }
 });

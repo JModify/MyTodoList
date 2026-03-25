@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
         padding: 10,
         marginBottom: 50,
         marginTop: 10,
-        marginLeft: 20,
+        marginLeft: 50,
         marginRight: 20,
         backgroundColor: Colors.deepBlue,
         borderRadius: 5,
@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
 
     // Save icon style.
     iconStyle: {
-        color: 'blue',
+        color: Colors.iconBlue,
         fontSize: 20,
     }
 });

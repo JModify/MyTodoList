@@ -64,13 +64,16 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
+        margin: 50,
     },
 
+    // View which wraps title label and text field.
     title: {
         padding: 5,
         margin: 8,
     },
 
+    // Title label style.
     titleLabel: {
         fontSize: 20,
         fontWeight: 'bold',
@@ -78,6 +81,7 @@ const styles = StyleSheet.create({
         paddingBottom: 8,
     },
 
+    // Title field style.
     titleField: {
         borderRadius: 5,
         borderWidth: 1,
@@ -85,11 +89,13 @@ const styles = StyleSheet.create({
         padding: 8,
     },
 
+    // View which wraps description label and text field.
     description: {
         padding: 5,
         margin: 8,
     },
 
+    // Description label style.
     descriptionLabel: {
         fontSize: 20,
         fontWeight: 'bold',
@@ -97,6 +103,7 @@ const styles = StyleSheet.create({
         paddingBottom: 8,
     },
 
+    // Description field style.
     descriptionField: {
         borderRadius: 5,
         borderWidth: 1,

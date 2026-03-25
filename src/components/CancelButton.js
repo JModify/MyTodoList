@@ -14,6 +14,7 @@ export default function CancelButton({navigation}) {
         <Pressable
             style={getButtonStyle}
             onPress={() => {
+                // Navigate back to home page.
                 navigation.goBack();
             }}
         >
@@ -30,7 +31,7 @@ const styles = StyleSheet.create({
         marginBottom: 50,
         marginTop: 10,
         marginLeft: 20,
-        marginRight: 20,
+        marginRight: 50,
         backgroundColor: Colors.deepBlue,
         borderRadius: 5,
         justifyContent: 'center',
@@ -55,9 +56,9 @@ const styles = StyleSheet.create({
         textAlign: 'center',
     },
 
-    // Save icon style.
+    // Cancel icon style.
     iconStyle: {
-        color: 'blue',
+        color: Colors.iconBlue,
         fontSize: 20,
     }
 });
