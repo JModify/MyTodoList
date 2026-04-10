@@ -2,10 +2,17 @@ import {StyleSheet, View, Text, TextInput, Keyboard, Pressable} from 'react-nati
 import SaveButton from '../components/SaveButton';
 import CancelButton from '../components/CancelButton';
 
+import {useState} from 'react';
+import Todo from '../models/Todo';
+import { addTodoItem } from '../utils/TodoDataStorage';
+
 export default function AddTodo({navigation}) {
 
     const titlePlaceholder = 'My new todo title';
     const descriptionPlaceholder = 'This is the description of my new todo.\nIt supports multi-line input.\n...'
+
+    const [title, setTitle] = useState('');
+    const [description, setDescription] = useState(``);
 
     return (
         // Ensures tapping anywhere on screen closes/dismisses keyboard
@@ -13,30 +20,61 @@ export default function AddTodo({navigation}) {
             <View style={styles.body}>
                 <View style={styles.title}>
                     <Text style={styles.titleLabel}>Title</Text>
-                    <TextInput placeholder={titlePlaceholder}
+                    <TextInput 
+                        // Placeholder text for empty title TextInput field.
+                        placeholder={titlePlaceholder}
+
+                        // Sets the style for the title field.
                         style={styles.titleField}
 
                         // Replaces return character with "done" character.
                         returnKeyType='done'
 
                         // Tapping "done" character closes/dismisses keyboard.
-                        onSubmitEditing={Keyboard.dismiss}/>
+                        onSubmitEditing={Keyboard.dismiss}
+
+                        // Currently stored title text.
+                        value={title}
+
+                        // Use setTitle callback function to update title text variable.
+                        onChangeText={setTitle}
+                    />
                 </View>
 
                 <View style={styles.description}>
                     <Text style={styles.descriptionLabel}>Description</Text>
-                    <TextInput placeholder={descriptionPlaceholder}
+                    <TextInput
+                        // Placeholder text for empty description TextInput field.
+                        placeholder={descriptionPlaceholder}
+
+                        // Sets the style for the description field.
                         style={styles.descriptionField}
+
+                        // Ensures multiline is permitted for field.
                         multiline={true}
 
-                        // Avoids android centering text vertically
-                        textAlignVertical='top'
+                        // Currently stored description text.
+                        value={description}
+
+                        // Use setDescription callback function to update description text variable.
+                        onChangeText={setDescription}
                         />
                 </View>
             </View>
             <View style={styles.footer}>
-                <CancelButton navigation={navigation}/>
-                <SaveButton navigation={navigation}/>
+                <CancelButton onPress={() => navigation.goBack()}/>
+                <SaveButton onPress={async () => {
+                    // Create new Todo model using provided fields.
+                    // isDone set to false by default since item has just been created.
+                    // Item ID set to current time in milliseconds
+                    const todoItem = new Todo(Date.now().toString(), title, description, false);
+
+                    // Await todo item being added asynchronously before navigating to home screen.
+                    await addTodoItem(todoItem);
+
+                    // Navigate back to home page.
+                    navigation.goBack()
+                }}/>
             </View>
         </Pressable>
     )

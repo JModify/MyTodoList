@@ -4,7 +4,7 @@ import Colors from '../constants/colors';
 // Using @Expo import since running SDK 54
 import Ionicons from '@expo/vector-icons/Ionicons';
 
-export default function SaveButton({navigation}) {
+export default function SaveButton({onPress}) {
     // Not yet implemented
     const saveContent = undefined
 
@@ -17,7 +17,7 @@ export default function SaveButton({navigation}) {
             style={getButtonStyle}
             onPress={() => {
                 // Not yet implemented
-                //saveContent();
+                onPress()
             }}
         >
             <Text style={styles.buttonText}><Ionicons name='save' style={styles.iconStyle}/> Save</Text>

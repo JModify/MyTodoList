@@ -1,10 +1,10 @@
 import { Pressable, StyleSheet, Text } from 'react-native';
 import Colors from '../constants/colors';
-
+ 
 // Using @Expo import since running SDK 54
 import Ionicons from '@expo/vector-icons/Ionicons';
 
-export default function CancelButton({navigation}) {
+export default function CancelButton({onPress}) {
 
     // Retrieve button style based on "pressed" status.
     const getButtonStyle = ({ pressed }) =>
@@ -15,7 +15,8 @@ export default function CancelButton({navigation}) {
             style={getButtonStyle}
             onPress={() => {
                 // Navigate back to home page.
-                navigation.goBack();
+                //navigation.goBack();
+                onPress();
             }}
         >
             <Text style={styles.buttonText}><Ionicons name='backspace' style={styles.iconStyle}/> Cancel</Text>

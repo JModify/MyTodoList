@@ -4,9 +4,7 @@ import Colors from '../constants/colors';
 // Using @Expo import since running SDK 54
 import Ionicons from '@expo/vector-icons/Ionicons';
 
-export default function TodoCreateButton({navigation}) {
-    // Navigate to todo creation screen.
-    const navToAddTodo = () => navigation.navigate('AddTodo');
+export default function TodoCreateButton({onPress}) {
 
     // Retrieve button style based on "pressed" status.
     const getButtonStyle = ({ pressed }) =>
@@ -16,8 +14,9 @@ export default function TodoCreateButton({navigation}) {
         <Pressable
             style={getButtonStyle}
             onPress={() => {
-                // Navigate to creation screen.
-                navToAddTodo();
+
+                // Navigate to todo creation screen.
+                onPress()
             }}
         >
             <Text style={styles.buttonText}><Ionicons name='add-circle' style={styles.iconStyle}/> ADD NEW TODO</Text>
