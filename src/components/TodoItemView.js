@@ -1,10 +1,10 @@
 import { StyleSheet, Text, View } from 'react-native';
 import Colors from '../constants/colors';
 
-export default function TodoItem({text}) {
+export default function TodoItem({todo}) {
     return (
         <View style={styles.item}>
-            <Text style={styles.itemText}>{text}</Text>
+            <Text style={styles.itemText}>{todo}</Text>
         </View>
     )
 }

@@ -3,6 +3,7 @@ const Colors = {
     // Todo creation button background colour.
     deepBlue: "#00a2ff",
 
+    // Color for button ionicons.
     iconBlue: "#0048ff",
 
     // Todo item background colour.

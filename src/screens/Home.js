@@ -1,17 +1,29 @@
 import { useLayoutEffect } from 'react';
 import {StyleSheet, View } from 'react-native';
-import TodoItem from '../components/TodoItem';
+import TodoItem from '../components/TodoView';
 import TodoCreateButton from '../components/TodoCreateButton';
 
 export default function Home({navigation}) {
+  const [todoData, setData] = useState({})
+  
+  useEffect( () => {
+    const firstLoad = async () => {
+      const data = await loadData();
+      setData(data)
+    };
+    firstLoad();
+  }, [])
+
     return (
         <View style={styles.container}>
             <View style={styles.body}>
-                <TodoItem text={"Buy Eggs"}/>
-                <TodoItem text={"Buy Apples"}/>
-                <TodoItem text={"Buy Milk"}/>
-                <TodoItem text={"Buy Olive Oil"}/>
-                <TodoItem text={"Buy Oranges"}/>
+                <FlatList
+                    data={todoData}
+                    renderItem={({item}) => {
+                        // TODO: Call TodoItemView to create view for each item.
+                    }}
+                    keyExtractor={(item) => item + Math.random()}
+                />
             </View>
             <View style={styles.footer}>
                 <TodoCreateButton navigation={navigation}/>           
