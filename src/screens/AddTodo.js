@@ -73,14 +73,14 @@ export default function AddTodo({navigation}) {
                             `Error`,
                             `Todo title or description can't be empty.`
                         )
-                        
+
                         return;
                     }
 
                     // Create new Todo model using provided fields.
                     // isDone set to false by default since item has just been created.
                     // Item ID set to current time in milliseconds
-                    const todoItem = new Todo(Date.now().toString(), title, description, false, false);
+                    const todoItem = new Todo(Date.now().toString(), title, description, false, true);
 
                     // Await todo item being added asynchronously before navigating to home screen.
                     await addTodoItem(todoItem);

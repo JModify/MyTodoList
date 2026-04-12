@@ -4,15 +4,29 @@ import { useState } from 'react';
 
 // Using @Expo import since running SDK 54
 import Ionicons from '@expo/vector-icons/Ionicons';
+import { updateTodoItem } from '../utils/TodoDataStorage';
 
 export default function TodoItemView({todo}) {
-    const [collapsed, setCollapsed] = useState(true);
+    // Create new useState hook with initial value being the collapsed state of the todo item.
+    const [collapsed, setCollapsed] = useState(todo.collapsed);
 
     return (
         <View style={styles.item}>
             <View style={styles.itemTitle}>
                 <Text style={styles.itemTitleText}>{todo.title}</Text>
-                <Pressable onPress={() => {
+                <Pressable onPress={async () => {
+                    // Update the collapsed state in AsyncStorage.
+                    // Props are supposed to be read-only so new todo object created.
+                    const updatedTodo = {
+                        id: todo.id,
+                        title: todo.title,
+                        description: todo.description,
+                        isDone: todo.isDone,
+                        collapsed: !collapsed,
+                    }
+
+                    await updateTodoItem(updatedTodo);
+
                     // Toggle collapsed state
                     setCollapsed(collapsed => !collapsed)
                 }}>
@@ -23,7 +37,7 @@ export default function TodoItemView({todo}) {
                 </Pressable>
             </View>
 
-            {collapsed && (
+            {!collapsed && (
                 <View style={styles.itemDetails}>
                     <Text style={styles.itemDescription}>{"\n" + todo.description}</Text>
                 </View>
@@ -64,7 +78,8 @@ const styles = StyleSheet.create({
     },
 
     itemDescription: {
-        fontSize: 15
+        fontSize: 15,
+        fontStyle: 'italic',
     }
 
 

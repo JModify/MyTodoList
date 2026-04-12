@@ -19,10 +19,28 @@ export async function loadTodoItems() {
     try {
         const jsonRaw = await AsyncStorage.getItem(storage_key);
         const jsonParsed = jsonRaw != null ? JSON.parse(jsonRaw) : [];
-        return jsonParsed.map(item => new Todo(item.id, item.title, item.description, 
-            item.isDone));
+        return jsonParsed.map(item => new Todo(
+            item.id, 
+            item.title, 
+            item.description, 
+            item.isDone, 
+            item.collapsed));
     } catch(e) {
         console.log(`Failed to read todo item data using storage key "${storage_key}".`, e);
+        return [];
+    }
+}
+
+export async function updateTodoItem(todoItem) {
+    try {
+        const currentItems = await loadTodoItems();
+        const updatedItems = currentItems.map(item =>
+            item.id === todoItem.id ? todoItem : item
+        );
+        await saveTodoItems(updatedItems);
+        return updatedItems;
+    } catch (e) {
+        console.log(`Failed to add todo item using storage key "${storage_key}".`, e);
         return [];
     }
 }
