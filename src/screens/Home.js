@@ -3,7 +3,7 @@ import TodoCreateButton from '../components/TodoCreateButton';
 import { useState, useEffect } from 'react';
 import { FlatList } from 'react-native';
 import TodoItemView from '../components/TodoItemView';
-import {clearTodoItems, loadTodoItems, deleteTodoItem} from '../utils/TodoDataStorage';
+import {loadTodoItems, deleteTodoItem} from '../utils/TodoDataStorage';
 
 
 export default function Home({navigation}) {
@@ -15,8 +15,6 @@ export default function Home({navigation}) {
             setTodoData(data);
         };
 
-        // Used for debugging.
-        //clearTodoItems();
         loadData();
 
         // Adds focus listener which loads data each time Home.js screen is in focus
@@ -31,7 +29,7 @@ export default function Home({navigation}) {
     // Required since focus listener does not pick up the change since user is on same screen.
     async function todoDeleteHandler(itemId) {
         await deleteTodoItem(itemId);
-        setTodoData(currentTodoData => currentTodoData.filter(item => item.id != itemId));
+        setTodoData(currentTodoData => currentTodoData.filter(item => item.id !== itemId));
     }
 
     return (

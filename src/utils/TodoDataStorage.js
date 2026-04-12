@@ -3,18 +3,6 @@ import Todo from "../models/Todo";
 
 const storage_key = 'todo-items'
 
-export async function addTodoItem(todoItem) {
-    try {
-        const currentItems = await loadTodoItems();
-        const updatedItems = [...currentItems, todoItem];
-        await saveTodoItems(updatedItems);
-        return updatedItems;
-    } catch (e) {
-        console.log(`Failed to add todo item using storage key "${storage_key}".`, e);
-        return [];
-    }
-}
-
 export async function loadTodoItems() {
     try {
         const jsonRaw = await AsyncStorage.getItem(storage_key);
@@ -27,6 +15,27 @@ export async function loadTodoItems() {
             item.collapsed));
     } catch(e) {
         console.log(`Failed to read todo item data using storage key "${storage_key}".`, e);
+        return [];
+    }
+}
+
+export async function saveTodoItems(todoItems) {
+    const jsonRaw = JSON.stringify(todoItems);
+    try {
+        await AsyncStorage.setItem(storage_key, jsonRaw);
+    } catch(e) {
+        console.log('Failed to write todo item data.', e);
+    }
+}
+
+export async function addTodoItem(todoItem) {
+    try {
+        const currentItems = await loadTodoItems();
+        const updatedItems = [...currentItems, todoItem];
+        await saveTodoItems(updatedItems);
+        return updatedItems;
+    } catch (e) {
+        console.log(`Failed to add todo item using storage key "${storage_key}".`, e);
         return [];
     }
 }
@@ -59,15 +68,6 @@ export async function deleteTodoItem(itemId) {
         return updatedItems;
     } catch (e) {
         console.log(`Failed to clear todo item data using storage key "${storage_key}".`, e);
-    }
-}
-
-export async function saveTodoItems(todoItems) {
-    const jsonRaw = JSON.stringify(todoItems);
-    try {
-        await AsyncStorage.setItem(storage_key, jsonRaw);
-    } catch(e) {
-        console.log('Failed to write todo item data.', e);
     }
 }
 

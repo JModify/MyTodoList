@@ -66,7 +66,7 @@ export default function AddTodo({navigation}) {
                 <SaveButton onPress={async () => {
 
                     // Checks that both title and description are entered.
-                    if (title === '' || description === '') {
+                    if (title.trim() === '' || description.trim() === '') {
                         
                         // Popup disallowing user from saving new todo until details entered.
                         Alert.alert(

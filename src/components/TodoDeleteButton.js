@@ -5,21 +5,17 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 
 export default function TodoDeleteButton({onPress}) {
     return (
-        <View style={styles.wrapper}>
-            <Pressable onPress={() => onPress()}>
+        <Pressable style={styles.wrapper} onPress={() => onPress()}>
+            <Ionicons name='trash' style={styles.icon}/>
 
-                <Ionicons name='trash' style={styles.icon}/>
-
-            </Pressable>
-        </View>
+        </Pressable>
     )
 }
 
 const styles = StyleSheet.create({
     wrapper: {
-        flexDirection: 'row',
-        flex: '1',
         alignContent: 'center',
+        justifyContent: 'center'
     },
 
     icon: {

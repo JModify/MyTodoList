@@ -5,21 +5,16 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 
 export default function TodoDoneButton({onPress}) {
     return (
-        <View style={styles.wrapper}>
-            <Pressable onPress={() => onPress()}>
-
-                <Ionicons name='cloud-done' style={styles.icon}/>
-
-            </Pressable>
-        </View>
+        <Pressable style={styles.wrapper} onPress={() => onPress()}>
+            <Ionicons name='cloud-done' style={styles.icon}/>
+        </Pressable>
     )
 }
 
 const styles = StyleSheet.create({
     wrapper: {
-        flexDirection: 'row',
-        flex: '1',
         alignContent: 'center',
+        justifyContent: 'center'
     },
 
     icon: {

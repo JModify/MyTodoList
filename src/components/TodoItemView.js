@@ -43,11 +43,11 @@ export default function TodoItemView({todo, deleteHandler}) {
 
             {!collapsed && (
                 <View style={styles.itemDetails}>
-                    <Text style={styles.itemDescription}>{"\n" + todo.description + "\n"}</Text>
+                    <Text style={styles.itemDescription}>{todo.description}</Text>
                     <View style={styles.itemActionButtons}>
 
                         {!done && (
-                            <TodoDoneButton onPress={() => toggleField("done", done, setDone)}/>
+                            <TodoDoneButton onPress={async () => {toggleField("done", done, setDone)}}/>
                         )}
 
                         <TodoDeleteButton onPress={async () => {deleteHandler(todo.id)}}/>
@@ -77,6 +77,8 @@ const styles = StyleSheet.create({
     // Style for item title text.
     itemTitleText: {
         fontSize: 20,
+        // Avoids inputs which are too long overflowing
+        //flexShrink: 1,
     },
 
     // Collapse/uncollapse todo icon
@@ -95,6 +97,7 @@ const styles = StyleSheet.create({
     itemDescription: {
         fontSize: 15,
         fontStyle: 'italic',
+        marginVertical: 10,
     },
 
     // Wraper for "todo done" and "todo delete" icons
