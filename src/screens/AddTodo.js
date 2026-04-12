@@ -66,13 +66,13 @@ export default function AddTodo({navigation}) {
                 <SaveButton onPress={async () => {
 
                     // Checks that both title and description are entered.
-                    if (title.trim() === '' || description.trim() === '') {
+                    if (title.trim() === "" || description.trim() === "") {
                         
                         // Popup disallowing user from saving new todo until details entered.
                         Alert.alert(
-                            `Error`,
-                            `Todo title or description can't be empty.`
-                        )
+                            "Error",
+                            "Todo title or description can't be empty."
+                        );
 
                         return;
                     }
@@ -83,17 +83,24 @@ export default function AddTodo({navigation}) {
                     const todoItem = new Todo(Date.now().toString(), title, description, false, true);
 
                     // Await todo item being added asynchronously before navigating to home screen.
-                    await addTodoItem(todoItem);
+                    try {
+                        await addTodoItem(todoItem);
+                    } catch {
+                        Alert.alert(
+                            "Error",
+                            "Failed to write new item to data file. Contact app developer!"
+                        );
+                        return;
+                    }
 
                     // Navigate back to home page.
                     navigation.goBack();
 
                     // Popup on Home screen for successful todo addition using Alert.
                     Alert.alert(
-                        `Success`,
-                        `Todo added successfully!`
-                    )
-
+                        "Success",
+                        "Todo added successfully!"
+                    );
                 }}/>
             </View>
         </Pressable>

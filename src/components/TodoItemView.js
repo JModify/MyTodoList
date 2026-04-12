@@ -1,4 +1,4 @@
-import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { Alert, Pressable, StyleSheet, Text, View } from 'react-native';
 import Colors from '../constants/colors';
 import { useState } from 'react';
 
@@ -23,7 +23,15 @@ export default function TodoItemView({todo, deleteHandler}) {
         }
 
         // Toggle state in persistent storage.
-        await updateTodoItem(updatedTodo);
+        try {
+            await updateTodoItem(updatedTodo);
+        } catch {
+            Alert.alert(
+                "Error",
+                "Failed update todo item in data file. Contact app developer!"
+            );
+            return;
+        }
 
         // Toggle rendered state using passed setState function (setCollapsed / setDone).
         setState(value => !value);

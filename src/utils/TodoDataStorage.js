@@ -15,7 +15,7 @@ export async function loadTodoItems() {
             item.collapsed));
     } catch(e) {
         console.log(`Failed to read todo item data using storage key "${storage_key}".`, e);
-        return [];
+        throw e;
     }
 }
 
@@ -25,6 +25,7 @@ export async function saveTodoItems(todoItems) {
         await AsyncStorage.setItem(storage_key, jsonRaw);
     } catch(e) {
         console.log('Failed to write todo item data.', e);
+        throw e;
     }
 }
 
@@ -36,7 +37,7 @@ export async function addTodoItem(todoItem) {
         return updatedItems;
     } catch (e) {
         console.log(`Failed to add todo item using storage key "${storage_key}".`, e);
-        return [];
+        throw e;
     }
 }
 
@@ -53,7 +54,7 @@ export async function updateTodoItem(todoItem) {
         return updatedItems;
     } catch (e) {
         console.log(`Failed to add todo item using storage key "${storage_key}".`, e);
-        return [];
+        throw e;
     }
 }
 
@@ -68,6 +69,7 @@ export async function deleteTodoItem(itemId) {
         return updatedItems;
     } catch (e) {
         console.log(`Failed to clear todo item data using storage key "${storage_key}".`, e);
+        throw e;
     }
 }
 
@@ -76,5 +78,6 @@ export async function clearTodoItems() {
         await AsyncStorage.removeItem(storage_key);
     } catch (e) {
         console.log(`Failed to clear todo item data using storage key "${storage_key}".`, e);
+        throw e;
     }
 }

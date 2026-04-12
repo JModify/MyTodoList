@@ -1,13 +1,17 @@
-import { View, Pressable, StyleSheet } from "react-native";
+import { Pressable, StyleSheet } from "react-native";
 
 // Using @Expo import since running SDK 54
 import Ionicons from '@expo/vector-icons/Ionicons';
 
 export default function TodoDeleteButton({onPress}) {
-    return (
-        <Pressable style={styles.wrapper} onPress={() => onPress()}>
-            <Ionicons name='trash' style={styles.icon}/>
 
+    // Retrieve button style based on "pressed" status.
+    const getButtonStyle = ({ pressed }) =>
+        pressed ? [styles.icon, styles.iconPressed] : styles.icon;
+
+    return (
+        <Pressable style={getButtonStyle} onPress={() => onPress()}>
+            <Ionicons name='trash' style={styles.icon}/>
         </Pressable>
     )
 }
@@ -21,5 +25,9 @@ const styles = StyleSheet.create({
     icon: {
         fontSize: 26,
         color: 'red'
+    },
+
+    iconPressed: {
+        opacity: 0.5,
     }
 })

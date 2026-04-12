@@ -1,4 +1,4 @@
-import {StyleSheet, View } from 'react-native';
+import {Alert, StyleSheet, View } from 'react-native';
 import TodoCreateButton from '../components/TodoCreateButton';
 import { useState, useEffect } from 'react';
 import { FlatList } from 'react-native';
@@ -28,7 +28,19 @@ export default function Home({navigation}) {
     // Function which is passed down to TodoItemView to update screen on deletion.
     // Required since focus listener does not pick up the change since user is on same screen.
     async function todoDeleteHandler(itemId) {
-        await deleteTodoItem(itemId);
+
+        // Attempts to delete from file, otherwise displays popup with error.
+        // Avoids screen and data file being out of sync.
+        try {
+            await deleteTodoItem(itemId);
+        } catch {
+            Alert.alert(
+                "Error",
+                "Failed to delete item from data file. Contact app developer!"
+            );
+            return;
+        }
+
         setTodoData(currentTodoData => currentTodoData.filter(item => item.id !== itemId));
     }
 
