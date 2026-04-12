@@ -34,6 +34,9 @@ export async function loadTodoItems() {
 export async function updateTodoItem(todoItem) {
     try {
         const currentItems = await loadTodoItems();
+
+        // Map each item to itself UNLESS it is the target item (found by id),
+        // In this case, map it to the new updated target item.
         const updatedItems = currentItems.map(item =>
             item.id === todoItem.id ? todoItem : item
         );
@@ -42,6 +45,20 @@ export async function updateTodoItem(todoItem) {
     } catch (e) {
         console.log(`Failed to add todo item using storage key "${storage_key}".`, e);
         return [];
+    }
+}
+
+export async function deleteTodoItem(itemId) {
+    try {
+        const currentItems = await loadTodoItems();
+
+        // Collect all other todo items which do not have the given unique id.
+        const updatedItems = currentItems.filter(item => item.id !== id);
+
+        await saveTodoItems(updatedItems);
+        return updatedItems;
+    } catch (e) {
+        console.log(`Failed to clear todo item data using storage key "${storage_key}".`, e);
     }
 }
 

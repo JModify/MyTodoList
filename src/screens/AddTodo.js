@@ -79,7 +79,7 @@ export default function AddTodo({navigation}) {
 
                     // Create new Todo model using provided fields.
                     // isDone set to false by default since item has just been created.
-                    // Item ID set to current time in milliseconds
+                    // Item ID set to current time in milliseconds.
                     const todoItem = new Todo(Date.now().toString(), title, description, false, true);
 
                     // Await todo item being added asynchronously before navigating to home screen.
@@ -87,6 +87,13 @@ export default function AddTodo({navigation}) {
 
                     // Navigate back to home page.
                     navigation.goBack();
+
+                    // Popup on Home screen for successful todo addition using Alert.
+                    Alert.alert(
+                        `Success`,
+                        `Todo added successfully!`
+                    )
+
                 }}/>
             </View>
         </Pressable>

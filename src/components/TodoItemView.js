@@ -5,6 +5,8 @@ import { useState } from 'react';
 // Using @Expo import since running SDK 54
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { updateTodoItem } from '../utils/TodoDataStorage';
+import TodoDoneButton from './TodoDoneButton';
+import TodoDeleteButton from './TodoDeleteButton';
 
 export default function TodoItemView({todo}) {
     // Create new useState hook with initial value being the collapsed state of the todo item.
@@ -39,7 +41,12 @@ export default function TodoItemView({todo}) {
 
             {!collapsed && (
                 <View style={styles.itemDetails}>
-                    <Text style={styles.itemDescription}>{"\n" + todo.description}</Text>
+                    <Text style={styles.itemDescription}>{"\n" + todo.description + "\n"}</Text>
+                    <View style={styles.itemActionButtons}>
+
+                        <TodoDoneButton/>
+                        <TodoDeleteButton/>
+                    </View>
                 </View>
             )}
         </View>
@@ -48,7 +55,7 @@ export default function TodoItemView({todo}) {
 
 const styles = StyleSheet.create({
 
-    // Style for todo item view wrapper.
+    // Style for component's wrapper container.
     item: {
         margin: 5,
         padding: 5,
@@ -56,31 +63,39 @@ const styles = StyleSheet.create({
         borderRadius: 5,
     },
 
-    // Style for title text
+    // Style for title wrapper container.
     itemTitle: {
         flexDirection: 'row',
         justifyContent: 'space-between'
     },
 
+    // Style for item title text.
     itemTitleText: {
         fontSize: 20,
     },
 
+    // Collapse/uncollapse todo icon
     itemTitleCollapsedIcon: {
         color: Colors.iconBlue,
         fontSize: 23,
     },
 
-    // Style for details view
+    // Wrapper for all item details (description and action buttons)
     itemDetails: {
         flexDirection: 'column',
         flex: 1,
     },
 
+    // Item description text.
     itemDescription: {
         fontSize: 15,
         fontStyle: 'italic',
-    }
+    },
 
-
+    // Wraper for "todo done" and "todo delete" icons
+    itemActionButtons: {
+        flexDirection: 'row',
+        flex: 1,
+        justifyContent: 'space-evenly',
+    },
 });
