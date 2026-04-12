@@ -1,4 +1,4 @@
-import {StyleSheet, View, Text, TextInput, Keyboard, Pressable} from 'react-native';
+import {StyleSheet, View, Text, TextInput, Keyboard, Pressable, Alert} from 'react-native';
 import SaveButton from '../components/SaveButton';
 import CancelButton from '../components/CancelButton';
 
@@ -64,16 +64,29 @@ export default function AddTodo({navigation}) {
             <View style={styles.footer}>
                 <CancelButton onPress={() => navigation.goBack()}/>
                 <SaveButton onPress={async () => {
+
+                    // Checks that both title and description are entered.
+                    if (title === '' || description === '') {
+                        
+                        // Popup disallowing user from saving new todo until details entered.
+                        Alert.alert(
+                            `Error`,
+                            `Todo title or description can't be empty.`
+                        )
+                        
+                        return;
+                    }
+
                     // Create new Todo model using provided fields.
                     // isDone set to false by default since item has just been created.
                     // Item ID set to current time in milliseconds
-                    const todoItem = new Todo(Date.now().toString(), title, description, false);
+                    const todoItem = new Todo(Date.now().toString(), title, description, false, false);
 
                     // Await todo item being added asynchronously before navigating to home screen.
                     await addTodoItem(todoItem);
 
                     // Navigate back to home page.
-                    navigation.goBack()
+                    navigation.goBack();
                 }}/>
             </View>
         </Pressable>

@@ -5,8 +5,6 @@ import Colors from '../constants/colors';
 import Ionicons from '@expo/vector-icons/Ionicons';
 
 export default function SaveButton({onPress}) {
-    // Not yet implemented
-    const saveContent = undefined
 
     // Retrieve button style based on "pressed" status.
     const getButtonStyle = ({ pressed }) =>

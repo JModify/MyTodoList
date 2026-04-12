@@ -1,9 +1,10 @@
 class Todo {
-    constructor(id, title, description, isDone = false) {
+    constructor(id, title, description, isDone = false, isDetailHidden = false) {
         this.id = id;
         this.title = title;
         this.description = description;
         this.isDone = isDone;
+        this.isDetailHidden = isDetailHidden;
     }
 
     toggleDone() {

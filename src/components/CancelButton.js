@@ -19,7 +19,9 @@ export default function CancelButton({onPress}) {
                 onPress();
             }}
         >
-            <Text style={styles.buttonText}><Ionicons name='backspace' style={styles.iconStyle}/> Cancel</Text>
+            <Text style={styles.buttonText}>
+                <Ionicons name='backspace' style={styles.iconStyle}/> Cancel
+            </Text>
         </Pressable>
     );
 

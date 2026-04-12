@@ -1,22 +1,31 @@
 import {StyleSheet, View } from 'react-native';
 import TodoCreateButton from '../components/TodoCreateButton';
 import { useState, useEffect } from 'react';
-import { FlatList } from 'react-native-gesture-handler';
+import { FlatList } from 'react-native';
 import TodoItemView from '../components/TodoItemView';
-import { clearTodoItems, loadTodoItems } from '../utils/TodoDataStorage';
+import {clearTodoItems, loadTodoItems, saveTodoItems} from '../utils/TodoDataStorage';
+
 
 export default function Home({navigation}) {
-  const [todoData, setTodoData] = useState([]);
+    const [todoData, setTodoData] = useState([]);
   
-  useEffect( () => {
-    const firstLoad = async () => {
-      const data = await loadTodoItems();
-      setTodoData(data);
-    };
-    // Used for debugging.
-    //clearTodoItems();
-    firstLoad();
-  }, [])
+    useEffect( () => {
+        const loadData = async () => {
+            const data = await loadTodoItems();
+            setTodoData(data);
+        };
+
+        // Used for debugging.
+        //clearTodoItems();
+        loadData();
+
+        // Adds focus listener which loads data each time Home.js screen is in focus
+        // Call back function is returned 'removeFocusListener' to be used in cleanup by RN later.
+        const removeFocusListener = navigation.addListener('focus', loadData);
+
+        // Cleanup for useEffect() function.
+        return removeFocusListener;
+    }, [navigation]);
 
     return (
         <View style={styles.container}>
