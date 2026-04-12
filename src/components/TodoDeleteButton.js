@@ -6,9 +6,7 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 export default function TodoDeleteButton({onPress}) {
     return (
         <View style={styles.wrapper}>
-            <Pressable onPress={() => {
-                onPress()
-            }}>
+            <Pressable onPress={() => onPress()}>
 
                 <Ionicons name='trash' style={styles.icon}/>
 

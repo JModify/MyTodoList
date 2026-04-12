@@ -3,7 +3,7 @@ import TodoCreateButton from '../components/TodoCreateButton';
 import { useState, useEffect } from 'react';
 import { FlatList } from 'react-native';
 import TodoItemView from '../components/TodoItemView';
-import {clearTodoItems, loadTodoItems, saveTodoItems} from '../utils/TodoDataStorage';
+import {clearTodoItems, loadTodoItems, deleteTodoItem} from '../utils/TodoDataStorage';
 
 
 export default function Home({navigation}) {
@@ -27,12 +27,19 @@ export default function Home({navigation}) {
         return removeFocusListener;
     }, [navigation]);
 
+    // Function which is passed down to TodoItemView to update screen on deletion.
+    // Required since focus listener does not pick up the change since user is on same screen.
+    async function todoDeleteHandler(itemId) {
+        await deleteTodoItem(itemId);
+        setTodoData(currentTodoData => currentTodoData.filter(item => item.id != itemId));
+    }
+
     return (
         <View style={styles.container}>
             <View style={styles.body}>
                 <FlatList
                     data={todoData}
-                    renderItem={({item}) => <TodoItemView todo={item}/>}
+                    renderItem={({item}) => <TodoItemView todo={item} deleteHandler={todoDeleteHandler}/>}
                     keyExtractor={(item) => item.id}
                 />
             </View>

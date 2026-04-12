@@ -23,7 +23,7 @@ export async function loadTodoItems() {
             item.id, 
             item.title, 
             item.description, 
-            item.isDone, 
+            item.done, 
             item.collapsed));
     } catch(e) {
         console.log(`Failed to read todo item data using storage key "${storage_key}".`, e);
@@ -53,7 +53,7 @@ export async function deleteTodoItem(itemId) {
         const currentItems = await loadTodoItems();
 
         // Collect all other todo items which do not have the given unique id.
-        const updatedItems = currentItems.filter(item => item.id !== id);
+        const updatedItems = currentItems.filter(item => item.id !== itemId);
 
         await saveTodoItems(updatedItems);
         return updatedItems;

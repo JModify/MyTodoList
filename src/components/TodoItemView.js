@@ -8,30 +8,32 @@ import { updateTodoItem } from '../utils/TodoDataStorage';
 import TodoDoneButton from './TodoDoneButton';
 import TodoDeleteButton from './TodoDeleteButton';
 
-export default function TodoItemView({todo}) {
+export default function TodoItemView({todo, deleteHandler}) {
     // Create new useState hook with initial value being the collapsed state of the todo item.
     const [collapsed, setCollapsed] = useState(todo.collapsed);
+    const [done, setDone] = useState(todo.done);
+
+    async function toggleField(fieldName, currentValue, setState) {
+        // Props are supposed to be read-only so new todo object created.
+        const updatedTodo = {
+            ...todo,
+
+            // Set field (done/collapsed) to inverse of passed value 
+            [fieldName]: !currentValue
+        }
+
+        // Toggle state in persistent storage.
+        await updateTodoItem(updatedTodo);
+
+        // Toggle rendered state using passed setState function (setCollapsed / setDone).
+        setState(value => !value);
+    }
 
     return (
         <View style={styles.item}>
             <View style={styles.itemTitle}>
                 <Text style={styles.itemTitleText}>{todo.title}</Text>
-                <Pressable onPress={async () => {
-                    // Update the collapsed state in AsyncStorage.
-                    // Props are supposed to be read-only so new todo object created.
-                    const updatedTodo = {
-                        id: todo.id,
-                        title: todo.title,
-                        description: todo.description,
-                        isDone: todo.isDone,
-                        collapsed: !collapsed,
-                    }
-
-                    await updateTodoItem(updatedTodo);
-
-                    // Toggle collapsed state
-                    setCollapsed(collapsed => !collapsed)
-                }}>
+                <Pressable onPress={() => toggleField("collapsed", collapsed, setCollapsed)}>
                     <Ionicons 
                         name={collapsed ? 'caret-down-outline' : 'caret-up-outline'}
                         style={styles.itemTitleCollapsedIcon}
@@ -44,8 +46,11 @@ export default function TodoItemView({todo}) {
                     <Text style={styles.itemDescription}>{"\n" + todo.description + "\n"}</Text>
                     <View style={styles.itemActionButtons}>
 
-                        <TodoDoneButton/>
-                        <TodoDeleteButton/>
+                        {!done && (
+                            <TodoDoneButton onPress={() => toggleField("done", done, setDone)}/>
+                        )}
+
+                        <TodoDeleteButton onPress={async () => {deleteHandler(todo.id)}}/>
                     </View>
                 </View>
             )}

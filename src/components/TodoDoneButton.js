@@ -1,4 +1,4 @@
-import { View, Pressable, StyleSheet } from "react-native"
+import { View, Pressable, StyleSheet } from "react-native";
 
 // Using @Expo import since running SDK 54
 import Ionicons from '@expo/vector-icons/Ionicons';
@@ -6,9 +6,7 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 export default function TodoDoneButton({onPress}) {
     return (
         <View style={styles.wrapper}>
-            <Pressable onPress={() => {
-                onPress()
-            }}>
+            <Pressable onPress={() => onPress()}>
 
                 <Ionicons name='cloud-done' style={styles.icon}/>
 
@@ -28,4 +26,4 @@ const styles = StyleSheet.create({
         fontSize: 26,
         color: 'green'
     }
-})
+});
