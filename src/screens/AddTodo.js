@@ -1,6 +1,6 @@
 import {StyleSheet, View, Text, TextInput, Keyboard, Pressable, Alert} from 'react-native';
 import SaveButton from '../components/SaveButton';
-import CancelButton from '../components/CancelButton';
+import BackButton from '../components/BackButton';
 
 import {useState} from 'react';
 import Todo from '../models/Todo';
@@ -62,7 +62,7 @@ export default function AddTodo({navigation}) {
                 </View>
             </View>
             <View style={styles.footer}>
-                <CancelButton onPress={() => navigation.goBack()}/>
+                <BackButton onPress={() => navigation.goBack()}/>
                 <SaveButton onPress={async () => {
 
                     // Checks that both title and description are entered.
@@ -93,10 +93,12 @@ export default function AddTodo({navigation}) {
                         return;
                     }
 
-                    // Navigate back to home page.
-                    navigation.goBack();
+                    // Title and description field cleared to prepare for popup.
+                    setTitle('');
+                    setDescription('');
 
-                    // Popup on Home screen for successful todo addition using Alert.
+                    // Popup on same screen for successful todo addition using Alert.
+                    // (title and description cleared at this stage)
                     Alert.alert(
                         "Success",
                         "Todo added successfully!"
@@ -124,7 +126,7 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
     },
 
-    // Footer display containing save and cancel button.
+    // Footer display containing save and back button.
     footer: {
         flexDirection: 'row',
         alignItems: 'center',

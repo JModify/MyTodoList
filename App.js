@@ -3,7 +3,6 @@ import {NavigationContainer} from "@react-navigation/native";
 import {createStackNavigator} from "@react-navigation/stack";
 import Home from "./src/screens/Home";
 import AddTodo from './src/screens/AddTodo';
-import {loadData, saveData} from './src/utils/TodoDataStorage';
 
 const Stack = createStackNavigator();
 

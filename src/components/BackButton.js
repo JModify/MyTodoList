@@ -4,7 +4,7 @@ import Colors from '../constants/colors';
 // Using @Expo import since running SDK 54
 import Ionicons from '@expo/vector-icons/Ionicons';
 
-export default function CancelButton({onPress}) {
+export default function BackButton({onPress}) {
 
     // Retrieve button style based on "pressed" status.
     const getButtonStyle = ({ pressed }) =>
@@ -20,7 +20,7 @@ export default function CancelButton({onPress}) {
             }}
         >
             <Text style={styles.buttonText}>
-                <Ionicons name='backspace' style={styles.iconStyle}/> Cancel
+                <Ionicons name='backspace' style={styles.iconStyle}/> Back
             </Text>
         </Pressable>
     );
