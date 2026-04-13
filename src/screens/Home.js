@@ -3,7 +3,7 @@ import TodoCreateButton from '../components/TodoCreateButton';
 import { useState, useEffect } from 'react';
 import { FlatList } from 'react-native';
 import TodoItemView from '../components/TodoItemView';
-import {loadTodoItems, deleteTodoItem} from '../utils/TodoDataStorage';
+import {loadTodoItems, deleteTodoItem, updateTodoItem} from '../utils/TodoDataStorage';
 
 
 export default function Home({navigation}) {
@@ -44,12 +44,31 @@ export default function Home({navigation}) {
         setTodoData(currentTodoData => currentTodoData.filter(item => item.id !== itemId));
     }
 
+    // Function is passed down to TodoItemView to ensure consistency
+    // with Todo state changes on render and in data storage.
+    async function todoUpdateHandler(item) {
+        try {
+            await updateTodoItem(item);
+        } catch {
+            Alert.alert(
+                "Error",
+                "Failed to update todo item in data file. Contact app developer!"
+            );
+            return;
+        }
+
+        setTodoData(currentTodoData => currentTodoData.map(i => i.id === item.id ? item : i));
+    }
+
     return (
         <View style={styles.container}>
             <View style={styles.body}>
                 <FlatList
                     data={todoData}
-                    renderItem={({item}) => <TodoItemView todo={item} deleteHandler={todoDeleteHandler}/>}
+                    renderItem={({item}) => <TodoItemView todo={item} 
+                                                updateHandler={todoUpdateHandler}
+                                                deleteHandler={todoDeleteHandler}
+                                            />}
                     keyExtractor={(item) => item.id}
                 />
             </View>

@@ -4,58 +4,45 @@ import { useState } from 'react';
 
 // Using @Expo import since running SDK 54
 import Ionicons from '@expo/vector-icons/Ionicons';
-import { updateTodoItem } from '../utils/TodoDataStorage';
 import TodoDoneButton from './TodoDoneButton';
 import TodoDeleteButton from './TodoDeleteButton';
 
-export default function TodoItemView({todo, deleteHandler}) {
-    // Create new useState hook with initial value being the collapsed state of the todo item.
-    const [collapsed, setCollapsed] = useState(todo.collapsed);
-    const [done, setDone] = useState(todo.done);
+export default function TodoItemView({todo, updateHandler, deleteHandler}) {
 
-    async function toggleField(fieldName, currentValue, setState) {
+    // Toggles collapsed / done fields within todo models.
+    // Uses passed update handler to do so.
+    async function toggleField(fieldName) {
         // Props are supposed to be read-only so new todo object created.
         const updatedTodo = {
             ...todo,
 
-            // Set field (done/collapsed) to inverse of passed value 
-            [fieldName]: !currentValue
+            // Set field (done/collapsed) to it's inversed value.
+            [fieldName]: !todo[fieldName]
         }
 
-        // Toggle state in persistent storage.
-        try {
-            await updateTodoItem(updatedTodo);
-        } catch {
-            Alert.alert(
-                "Error",
-                "Failed update todo item in data file. Contact app developer!"
-            );
-            return;
-        }
-
-        // Toggle rendered state using passed setState function (setCollapsed / setDone).
-        setState(value => !value);
+        // Wait for update handler to update value.
+        await updateHandler(updatedTodo);
     }
 
     return (
         <View style={styles.item}>
             <View style={styles.itemTitle}>
                 <Text style={styles.itemTitleText}>{todo.title}</Text>
-                <Pressable onPress={() => toggleField("collapsed", collapsed, setCollapsed)}>
+                <Pressable onPress={() => toggleField("collapsed")}>
                     <Ionicons 
-                        name={collapsed ? 'caret-down-outline' : 'caret-up-outline'}
+                        name={todo.collapsed ? 'caret-down-outline' : 'caret-up-outline'}
                         style={styles.itemTitleCollapsedIcon}
                     />
                 </Pressable>
             </View>
 
-            {!collapsed && (
+            {!todo.collapsed && (
                 <View style={styles.itemDetails}>
                     <Text style={styles.itemDescription}>{todo.description}</Text>
                     <View style={styles.itemActionButtons}>
 
-                        {!done && (
-                            <TodoDoneButton onPress={async () => {toggleField("done", done, setDone)}}/>
+                        {!todo.done && (
+                            <TodoDoneButton onPress={async () => {toggleField("done")}}/>
                         )}
 
                         <TodoDeleteButton onPress={async () => {deleteHandler(todo.id)}}/>
